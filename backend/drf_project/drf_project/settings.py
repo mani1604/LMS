@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config("SECRET_KEY") # Load .env
+SECRET_KEY = config("SECRET_KEY") #  Load .env
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -43,7 +43,9 @@ INSTALLED_APPS = [
     'api',
     'students',
     'mentors',
-    'django_filters'
+    'django_filters',
+    'accounts',
+    'rest_framework_simplejwt'
 ]
 
 MIDDLEWARE = [
@@ -129,5 +131,6 @@ REST_FRAMEWORK = {'DEFAULT_PAGINATION_CLASS':
                   'DEFAULT_FILTER_BACKENDS': 
                   ['django_filters.rest_framework.DjangoFilterBackend'],
                   'SEARCH_PARAM': 'q',
-                  'ORDERING_PARAM': 'sort_by'
+                  'ORDERING_PARAM': 'sort_by',
+                  'DEFAULT_AUTHENTICATION_CLASSES': ('rest_framework_simplejwt.authentication.JWTAuthentication')
                   }

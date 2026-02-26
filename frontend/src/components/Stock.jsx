@@ -1,4 +1,5 @@
 import {useState} from 'react'
+import stockImage from '../assets/tcs.jpg'
 
 const Stock = () => {
   const [stockObj, setStockPrice] = 
@@ -13,6 +14,7 @@ const Stock = () => {
         <h3>Stock name: {stockObj.name}</h3>
         <h3>Stock Price: {stockObj.price}</h3>
         <h3>PE: {stockObj.pe}</h3>
+        <img src={stockImage} alt="TCS" width={500}/>
         <button onClick={increasePrice}>
             Increase Price
         </button>

@@ -6,14 +6,14 @@ const Result = ({students}) => {
     setCounter(counter + 1)
   }
 
-  const totalMarks = () => {
+  const totalMarks = useMemo(()  => {
     console.log("Calculating total marks")
     let total = 0
     for (let i=0; i<students.length; i++) {
         total += students[i].marks
     }
     return total
-  }
+  }, [students]);
   return (
     <>
         <h3>Counter: {counter}</h3>
