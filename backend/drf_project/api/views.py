@@ -13,6 +13,7 @@ from .paginations import StudentPagination
 from students.filters import StudentFilter
 from mentors.filters import MentorFilter
 from rest_framework.filters import SearchFilter, OrderingFilter
+from  rest_framework.permissions import AllowAny
 
 # Create your views here.
 @api_view(['GET', 'POST'])
@@ -159,6 +160,7 @@ class StudentsView(viewsets.ModelViewSet):
     filterset_class = StudentFilter
     filter_backends = [OrderingFilter]
     ordering_fields = ["student_id", "name"]
+    permission_classes = [AllowAny]
 
 class MentorsView(generics.ListCreateAPIView):
     queryset = Mentor.objects.all()
@@ -167,6 +169,7 @@ class MentorsView(generics.ListCreateAPIView):
     filter_backends = [SearchFilter, OrderingFilter]
     search_fields = ["mentor_expertise"]
     ordering_fields = ["mentor_name"]
+    permission_classes = [AllowAny]
 
 class MentorDetails(generics.RetrieveUpdateDestroyAPIView):
     queryset = Mentor.objects.all()

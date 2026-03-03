@@ -14,6 +14,8 @@ import InputBox from './components/InputBox'
 import MyCounter from './components/MyCounter'
 import Greeting from './components/Greeting'
 import NameList from './components/NameList'
+import LoginForm from './components/LoginForm'
+import RegisterForm from './components/RegisterForm'
 
 function App() {
   let id = 1001
@@ -46,6 +48,8 @@ function App() {
       <Greeting isLoggedIn={false} name="John"/>
       <NameList/>
       <Stock/>
+      <LoginForm/>
+      <RegisterForm/>
     </>
   )
 }
