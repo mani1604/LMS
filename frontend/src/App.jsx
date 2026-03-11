@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 import HelloWorld from "./components/Hello"
 import Teachers from "./components/Teachers"
 
@@ -7,6 +8,7 @@ import Stock from './components/Stock'
 import Mentor from "./components/Mentor"
 
 import './App.css'
+import './assets/css/styles.css'
 import StudentList from './components/StudentList'
 import Result from './components/Result'
 import StudentContext from './context/StudentContext'
@@ -16,6 +18,11 @@ import Greeting from './components/Greeting'
 import NameList from './components/NameList'
 import LoginForm from './components/LoginForm'
 import RegisterForm from './components/RegisterForm'
+import Header from './components/Header'
+import Footer from './components/Footer'
+import MainContent from './components/MainContent'
+import Register from './components/Register'
+import Login from './components/Login'
 
 function App() {
   let id = 1001
@@ -33,7 +40,7 @@ function App() {
   return (
     <>
       <StudentContext.Provider value={studentName}>
-        <h1>React Project</h1>
+        {/* <h1 style={{ backgroundColor: "blue", color: "white", fontSize:"50px" }}>React Project</h1> */}
         {/* <HelloWorld/> */}
         {/* <StudentList/> */}
         {/* <Teachers name="Mark" id={id}/> */}
@@ -41,15 +48,24 @@ function App() {
         {/* <StateExample/> */}
         {/* <Stock/> */}
         {/* <Result students={students}/> */}
-        <Teachers/>
-      </StudentContext.Provider>
-      <InputBox/>
-      <MyCounter/>
-      <Greeting isLoggedIn={false} name="John"/>
-      <NameList/>
-      <Stock/>
-      <LoginForm/>
-      <RegisterForm/>
+        {/* <Teachers/> */}
+        </StudentContext.Provider>
+        {/* <InputBox/>
+        <MyCounter/>
+        <Greeting isLoggedIn={false} name="John"/>
+        <NameList/>
+        <Stock/>
+        <LoginForm/> */}
+        {/* <RegisterForm/> */}
+        <BrowserRouter>
+          <Header/>
+          <Routes>
+            <Route path="/" element={<MainContent />}/>
+            <Route path="/register" element={<Register />}/> // to load the Register component
+            <Route path="/login" element={<Login />}/>
+          </Routes>
+          <Footer/>
+        </BrowserRouter>
     </>
   )
 }

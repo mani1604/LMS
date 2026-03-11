@@ -12,7 +12,7 @@ const RegisterForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault() // this prevents page refresh
-    alert(`Welcome ${name}`)
+    console.log(formData)
   }
 
   return (
