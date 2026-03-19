@@ -1,12 +1,23 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
+import { useNavigate } from 'react-router-dom'
 import axios from "axios"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+import AuthProvider, { AuthContext } from '../AuthProvider'
 
 const Login = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [errors, setErrors] = useState({})
+  const [success, setSuccess] = useState(false)
+  const {isLoggedIn, setIsLoggedIn} = useContext(AuthContext)
+
+  const navigate = useNavigate()
 
   const handleLogin = async (e) => {
     e.preventDefault()
+    setLoading(true)
     const userData = {
       username, password
     }
@@ -18,8 +29,15 @@ const Login = () => {
         localStorage.setItem("accessToken", response.data.access)
         localStorage.setItem("refreshToken", response.data.refresh)
         console.log("Login successful")
+        setIsLoggedIn(true)
+        navigate('/') // Navigate to Home page
+        setErrors({})
+        setSuccess(true)
     } catch(error) {
+        setErrors(error.response.data)
         console.log("Some error occurred while login: ", error.response.data)
+    } finally {
+        setLoading(false)
     }
   }
 
@@ -34,10 +52,21 @@ const Login = () => {
                             <input type="text" className='form-control' placeholder='Username' value={username} onChange={(e) => setUsername(e.target.value)} />
                         </div>
                         <div className='mb-3'>
-                            <input type="password" className='form-control' placeholder='Set password' value={password} onChange={(e) => setPassword(e.target.value)} />
+                            <input type="password" className='form-control' placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} />
+                        </div>
+
+                        <div className='mb-3'>
+                            {errors.detail && <div className='text-danger'>{errors.detail}</div>}
                         </div>
                         
-                       <button type='submit' className='btn btn-info d-block mx-auto'>Login</button>
+                        {success && <div className='alert alert-success text-center'>Login Successful</div>}
+
+                        {loading ? (
+                            <button type='submit' className='btn btn-info d-block mx-auto' disabled><FontAwesomeIcon icon={faSpinner} spin/>Please Wait...</button>
+                        ) : (
+                            <button type='submit' className='btn btn-info d-block mx-auto'>Login</button>
+                        )}
+                        
                     </form>
                 </div>
             </div>

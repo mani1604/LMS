@@ -23,6 +23,7 @@ import Footer from './components/Footer'
 import MainContent from './components/MainContent'
 import Register from './components/Register'
 import Login from './components/Login'
+import AuthProvider from './AuthProvider'
 
 function App() {
   let id = 1001
@@ -57,15 +58,17 @@ function App() {
         <Stock/>
         <LoginForm/> */}
         {/* <RegisterForm/> */}
-        <BrowserRouter>
-          <Header/>
-          <Routes>
-            <Route path="/" element={<MainContent />}/>
-            <Route path="/register" element={<Register />}/> // to load the Register component
-            <Route path="/login" element={<Login />}/>
-          </Routes>
-          <Footer/>
-        </BrowserRouter>
+        <AuthProvider>
+          <BrowserRouter>
+            <Header/>
+            <Routes>
+              <Route path="/" element={<MainContent />}/>
+              <Route path="/register" element={<Register />}/> // to load the Register component
+              <Route path="/login" element={<Login />}/>
+            </Routes>
+            <Footer/>
+          </BrowserRouter>
+        </AuthProvider>
     </>
   )
 }
