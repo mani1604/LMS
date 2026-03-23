@@ -24,6 +24,8 @@ import MainContent from './components/MainContent'
 import Register from './components/Register'
 import Login from './components/Login'
 import AuthProvider from './AuthProvider'
+import Dashboard from './components/protected/Dashboard'
+import CounterUseEffect from './components/CounterUseEffect'
 
 function App() {
   let id = 1001
@@ -58,6 +60,7 @@ function App() {
         <Stock/>
         <LoginForm/> */}
         {/* <RegisterForm/> */}
+        <CounterUseEffect />
         <AuthProvider>
           <BrowserRouter>
             <Header/>
@@ -65,6 +68,7 @@ function App() {
               <Route path="/" element={<MainContent />}/>
               <Route path="/register" element={<Register />}/> // to load the Register component
               <Route path="/login" element={<Login />}/>
+              <Route path="/dashboard" element={<Dashboard />} />
             </Routes>
             <Footer/>
           </BrowserRouter>
