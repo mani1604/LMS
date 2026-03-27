@@ -60,7 +60,7 @@ function App() {
         <Stock/>
         <LoginForm/> */}
         {/* <RegisterForm/> */}
-        <CounterUseEffect />
+        {/* <CounterUseEffect /> */}
         <AuthProvider>
           <BrowserRouter>
             <Header/>

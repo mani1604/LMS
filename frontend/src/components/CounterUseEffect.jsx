@@ -7,6 +7,11 @@ const CounterUseEffect = () => {
   useEffect( () => {
     // Side effect code here
     console.log("Inside useEffect")
+
+    // Cleanup function
+    return () => {
+      console.log("Cleanup function call")
+    }
   }, [count])
 
   const increaseCount = () => {
