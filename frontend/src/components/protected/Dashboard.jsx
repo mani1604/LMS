@@ -1,19 +1,13 @@
-import React, { useEffect } from 'react'
-import axios from 'axios'
+import { useEffect } from 'react'
 import axiosInstance from '../../axiosInstance'
 
 const Dashboard = () => {
-  const accessToken = localStorage.getItem("accessToken")
 
   useEffect(() => {
     const getData = async () => {
       try {
         // Send API request
-        const response = await axiosInstance.get("/dashboard-protected/", {
-          headers: {
-            Authorization: `Bearer ${accessToken}`
-          }
-        })
+        const response = await axiosInstance.get("/dashboard-protected/")
         console.log("Response: ", response.data)
       } catch(error) {
         console.error("Some error occurred while fetching protected API", error)
