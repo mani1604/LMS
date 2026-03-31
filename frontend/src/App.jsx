@@ -26,6 +26,8 @@ import Login from './components/Login'
 import AuthProvider from './AuthProvider'
 import Dashboard from './components/protected/Dashboard'
 import CounterUseEffect from './components/CounterUseEffect'
+import PrivateRoute from './PrivateRoute'
+import PublicRoute from './PublicRoute'
 
 function App() {
   let id = 1001
@@ -66,9 +68,9 @@ function App() {
             <Header/>
             <Routes>
               <Route path="/" element={<MainContent />}/>
-              <Route path="/register" element={<Register />}/> // to load the Register component
-              <Route path="/login" element={<Login />}/>
-              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/register" element={<PublicRoute><Register /></PublicRoute>}/> // to load the Register component
+              <Route path="/login" element={<PublicRoute><Login /></PublicRoute>}/>
+              <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
             </Routes>
             <Footer/>
           </BrowserRouter>

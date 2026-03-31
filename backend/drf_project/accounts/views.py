@@ -5,6 +5,9 @@ from .serializers import UserSerializer
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from django.contrib.auth import authenticate
+from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.exceptions import TokenError
 
 # Create your views here.
 class RegisterView(generics.CreateAPIView):
@@ -18,3 +21,60 @@ class DashboardView(APIView):
 
     def get(self, request):
         return Response({"message": "Welcome to the dashboard"})
+
+
+class LoginView(APIView):
+    def post(self, request):
+        username = request.data.get("username")
+        password = request.data.get("password")
+
+        user = authenticate(username=username, password=password)
+
+        if not user:
+            return Response({"error": "Invalid credentials"}, status=401)
+        
+        refresh = RefreshToken.for_user(user) # fetch the refresh and access token for the user
+        access = refresh.access_token
+
+        response = Response({"message": "Login Successful"})
+
+        response.set_cookie(
+            key="access_token",
+            value=str(access),
+            httponly=True,
+            secure=False # Make True in production
+        )
+
+        response.set_cookie(
+            key="refresh_token",
+            value=str(refresh),
+            httponly=True,
+            secure=False
+        )
+
+        return response
+    
+class RefreshView(APIView):
+    def post(self, request):
+        refresh_string = request.COOKIES.get("refresh_token")
+
+        if not refresh:
+            return Response({"error": "No refresh token sent"}, status=401)
+        
+        try:
+            refresh = RefreshToken(refresh_string)
+            access = refresh.access_token
+
+            response = Response({"message": "Token refreshed"})
+
+            response.set_cookie(
+                key='access_token',
+                value=str(access),
+                httponly=True,
+                secure=False
+            )
+
+            return response
+        except TokenError:
+            return Response({'error': 'Invalid token'}, status=401)
+

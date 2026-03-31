@@ -31,7 +31,7 @@ axiosInstance.interceptors.response.use(
     async function(error) {
         // Accept the original request -> Check for 401 error -> Call the token/refresh/ API -> get the new access token -> send the new access token with the request to /dashboard-protected
         const originalRequest = error.config // Stores the original request using the config
-        if (error.response.status === 401 && !originalRequest.retry) {
+        if (error.response.status === 401 && !originalRequest.retry && !originalRequest.url.includes("token/refresh/") ) {
             originalRequest.retry = true
             const refreshToken = localStorage.getItem("refreshToken")
             try {
