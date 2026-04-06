@@ -20,7 +20,7 @@ const Register = () => {
 
     try {
         // POST request to django backend
-        const response = await axios.post("http://127.0.0.1:8000/api/v1/register/", userData)
+        const response = await axios.post("http://localhost:8000/api/v1/register/", userData)
         console.log("Response Data is: ", response.data)
         console.log("Registration successful")
         setErrors({})

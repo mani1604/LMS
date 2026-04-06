@@ -135,8 +135,14 @@ REST_FRAMEWORK = {'DEFAULT_PAGINATION_CLASS':
                   ['django_filters.rest_framework.DjangoFilterBackend'],
                   'SEARCH_PARAM': 'q',
                   'ORDERING_PARAM': 'sort_by',
-                  'DEFAULT_AUTHENTICATION_CLASSES': ['rest_framework_simplejwt.authentication.JWTAuthentication']
+                  'DEFAULT_AUTHENTICATION_CLASSES': ['accounts.authentication.CookieJWTAuthentication']
                   }
+
+CORS_ALLOW_CREDENTIALS = True # Allows the browser to send cookies along with cross-origin requests
+
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:5173"
+]
 
 # CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = [

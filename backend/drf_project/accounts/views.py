@@ -58,7 +58,7 @@ class RefreshView(APIView):
     def post(self, request):
         refresh_string = request.COOKIES.get("refresh_token")
 
-        if not refresh:
+        if not refresh_string:
             return Response({"error": "No refresh token sent"}, status=401)
         
         try:
@@ -78,3 +78,11 @@ class RefreshView(APIView):
         except TokenError:
             return Response({'error': 'Invalid token'}, status=401)
 
+
+class LogoutView(APIView):
+    def post(self, request):
+        response = Response({"message": "Logged out"})
+        response.delete_cookie("access_token")
+        response.delete_cookie("refresh_token")
+        return response
+    

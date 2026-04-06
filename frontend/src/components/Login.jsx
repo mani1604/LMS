@@ -25,9 +25,7 @@ const Login = () => {
 
     try {
         // POST request to django backend
-        const response = await axios.post("http://127.0.0.1:8000/api/v1/token/", userData)
-        localStorage.setItem("accessToken", response.data.access)
-        localStorage.setItem("refreshToken", response.data.refresh)
+        await axios.post("http://localhost:8000/api/v1/login/", userData, {withCredentials:true})
         console.log("Login successful")
         setIsLoggedIn(true)
         navigate('/dashboard') // Navigate to Dashboard page

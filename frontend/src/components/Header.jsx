@@ -1,14 +1,14 @@
 import { Link, useNavigate } from "react-router-dom"
 import AuthProvider, { AuthContext } from "../AuthProvider"
 import { useContext } from "react"
+import axiosInstance from "../axiosInstance"
 
 const Header = () => {
   const {isLoggedIn, setIsLoggedIn} = useContext(AuthContext)
   const navigate = useNavigate()
 
-  const handleLogout = () => {
-    localStorage.removeItem('accessToken') // Deletes Access token
-    localStorage.removeItem('refreshToken') // Deletes Refresh token
+  const handleLogout = async () => {
+    await axiosInstance.post("logout/")
     setIsLoggedIn(false) // Set the isLoggedIn to false
     console.log("Logged Out!")
     navigate('/login') // navigate to the Login page
