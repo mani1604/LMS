@@ -45,11 +45,6 @@ jobs:
                 cd backend/drf_project
                 pip install -r requirements.txt
 
-            - name: Run migrations
-              run: |
-                cd backend/drf_project
-                python manage.py migrate
-
             - name: Run tests
               run: |
                 cd backend/drf_project
