@@ -109,6 +109,8 @@ jobs:
                 push: true
                 no-cache: true
                 tags: ${{ secrets.DOCKER_USERNAME }}/lms-frontend:latest
+                build-args: |
+                  VITE_API_URL=https://lms-backend-10yg.onrender.com
 
     deploy:
       runs-on: ubuntu-latest
