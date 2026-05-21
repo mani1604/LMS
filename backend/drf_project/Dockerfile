@@ -8,7 +8,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-# Collect static files
-RUN python manage.py collectstatic --noinput
+ENV PYTHONUNBUFFERED=1
 
-CMD ["sh", "-c", "python manage.py migrate && gunicorn drf_project.wsgi:application --bind 0.0.0.0:8000"]
+EXPOSE 8000
+
+CMD ["sh", "-c", "python manage.py collectstatic --noinput && python manage.py migrate && gunicorn drf_project.wsgi:application --bind 0.0.0.0:8000"]
