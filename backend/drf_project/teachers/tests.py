@@ -27,7 +27,7 @@ class TeacherModelTest(TestCase):
 
     def test_id_exceed_max_length(self):
         teacher_invalid = Teacher(
-            teacher_id="T1234567890",
+            teacher_id="T1234567890A",
             name="John Brown",
             email="john@example.com"
         )
